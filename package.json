@@ -1,0 +1,24 @@
+{
+  "name": "v2v-vision-book",
+  "version": "1.0.0",
+  "description": "V2V Intelligence System - HAIKU-Constrained Vision Book",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve .",
+    "deploy": "vercel --prod",
+    "version": "npm version patch && git push --tags"
+  },
+  "keywords": [
+    "v2v",
+    "zensis",
+    "spark-sis",
+    "haiku",
+    "vision-book"
+  ],
+  "author": "Digital DaVinci",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.0",
+    "vercel": "^32.0.0"
+  }
+}

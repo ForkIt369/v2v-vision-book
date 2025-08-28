@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V2V Intelligence System - HAIKU Documentation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* HAIKU Foundation: 4-3-2-1 Framework */
+        :root {
+            /* 1 BASE UNIT (8px) */
+            --unit: 8px;
+            
+            /* 2 OPTIONS (simple wins) */
+            --theme: light;
+            
+            /* 3 CONSTRAINTS max */
+            --constraint-1: grid;
+            --constraint-2: typography;
+            --constraint-3: color;
+            
+            /* 4 PILLARS */
+            --pillar-constraint: 3;
+            --pillar-ratio: 60-30-10;
+            --pillar-harmony: 1.618;
+            --pillar-flow: vertical;
+            
+            /* BDS v3.1 Agent Colors */
+            --bigsis: #00A1F1;
+            --bro: #FE5F00;
+            --lilsis: #7E3AF2;
+            --cbo: #3EB85F;
+            --neutral: #393939;
+            
+            /* Light Mode Colors (Default) */
+            --color-60: #FFFFFF;  /* Background */
+            --color-30: #F7F7F7;  /* Sidebar */
+            --color-10: var(--bigsis); /* Accent */
+            
+            /* Text Colors */
+            --text-primary: #393939;  /* Main text */
+            --text-secondary: rgba(57, 57, 57, 0.7);  /* Secondary text */
+            --text-muted: rgba(57, 57, 57, 0.5);  /* Muted text */
+            --text-inverse: #FFFFFF;  /* Inverse text */
+            
+            /* Borders */
+            --border-color: rgba(57, 57, 57, 0.1);
+            
+            /* 5-3-2 Typography Rule */
+            /* 5 sizes */
+            --size-h1: 48px;
+            --size-h2: 32px;
+            --size-h3: 24px;
+            --size-body: 16px;
+            --size-small: 14px;
+            
+            /* 3 weights */
+            --weight-regular: 400;
+            --weight-medium: 500;
+            --weight-bold: 700;
+            
+            /* 2 families */
+            --font-display: 'DM Sans', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            
+            /* Base 8 Grid Spacing */
+            --space-1: calc(var(--unit) * 1);  /* 8px */
+            --space-2: calc(var(--unit) * 2);  /* 16px */
+            --space-3: calc(var(--unit) * 3);  /* 24px */
+            --space-4: calc(var(--unit) * 4);  /* 32px */
+            --space-6: calc(var(--unit) * 6);  /* 48px */
+            --space-8: calc(var(--unit) * 8);  /* 64px */
+        }
+        
+        /* Dark theme (2nd option) */
+        [data-theme="dark"] {
+            /* Dark Mode Colors */
+            --color-60: #0A0A0A;  /* Background */
+            --color-30: #1A1A1A;  /* Sidebar */
+            --color-10: var(--bigsis); /* Accent stays same */
+            
+            /* Dark Mode Text Colors */
+            --text-primary: #FFFFFF;  /* Main text */
+            --text-secondary: rgba(255, 255, 255, 0.7);  /* Secondary text */
+            --text-muted: rgba(255, 255, 255, 0.5);  /* Muted text */
+            --text-inverse: #0A0A0A;  /* Inverse text */
+            
+            /* Dark Mode Borders */
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            font-size: var(--size-body);
+            font-weight: var(--weight-regular);
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--color-60);
+        }
+        
+        /* HAIKU Layout: 60-30-10 */
+        .layout {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            min-height: 100vh;
+        }
+        
+        /* 30% Sidebar Navigation */
+        .sidebar {
+            background: var(--color-30);
+            padding: var(--space-4);
+            border-right: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        
+        .sidebar-header {
+            margin-bottom: var(--space-4);
+            padding-bottom: var(--space-3);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .sidebar-title {
+            font-family: var(--font-display);
+            font-size: var(--size-h3);
+            font-weight: var(--weight-bold);
+            color: var(--text-primary);
+        }
+        
+        .sidebar-subtitle {
+            font-size: var(--size-small);
+            color: var(--text-muted);
+            margin-top: var(--space-1);
+        }
+        
+        /* Navigation Groups */
+        .nav-group {
+            margin-bottom: var(--space-3);
+        }
+        
+        .nav-group-title {
+            font-size: var(--size-small);
+            font-weight: var(--weight-medium);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: var(--space-2);
+            display: flex;
+            align-items: center;
+            gap: var(--space-1);
+        }
+        
+        .nav-group-icon {
+            font-size: var(--size-body);
+        }
+        
+        .nav-link {
+            display: block;
+            padding: var(--space-1) var(--space-2);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            font-size: var(--size-small);
+        }
+        
+        .nav-link:hover {
+            background: rgba(0, 161, 241, 0.1);
+            color: var(--bigsis);
+        }
+        
+        .nav-link.active {
+            background: var(--bigsis);
+            color: var(--text-inverse);
+            font-weight: var(--weight-medium);
+        }
+        
+        /* 60% Main Content */
+        .content {
+            padding: var(--space-6);
+            max-width: 720px;
+            margin: 0 auto;
+        }
+        
+        /* Typography Hierarchy */
+        h1 {
+            font-family: var(--font-display);
+            font-size: var(--size-h1);
+            font-weight: var(--weight-bold);
+            line-height: 1.2;
+            margin-bottom: var(--space-2);
+            color: var(--text-primary);
+        }
+        
+        .lead {
+            font-size: calc(var(--size-body) * 1.25);
+            color: var(--text-secondary);
+            margin-bottom: var(--space-4);
+            line-height: 1.6;
+        }
+        
+        h2 {
+            font-family: var(--font-display);
+            font-size: var(--size-h2);
+            font-weight: var(--weight-bold);
+            margin-top: var(--space-6);
+            margin-bottom: var(--space-3);
+            color: var(--text-primary);
+        }
+        
+        h3 {
+            font-family: var(--font-display);
+            font-size: var(--size-h3);
+            font-weight: var(--weight-medium);
+            margin-top: var(--space-4);
+            margin-bottom: var(--space-2);
+            color: var(--text-primary);
+        }
+        
+        p {
+            margin-bottom: var(--space-3);
+            line-height: 1.8;
+        }
+        
+        /* Code Block */
+        .code-block {
+            background: var(--color-30);
+            padding: var(--space-3);
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: var(--size-small);
+            color: var(--text-primary);
+            overflow-x: auto;
+            margin: var(--space-4) 0;
+        }
+        
+        /* Formula Card (HAIKU Constrained) */
+        .formula-card {
+            background: linear-gradient(135deg, rgba(0, 161, 241, 0.05), rgba(126, 58, 242, 0.05));
+            border: 1px solid rgba(0, 161, 241, 0.2);
+            border-radius: 8px;
+            padding: var(--space-4);
+            margin: var(--space-4) 0;
+        }
+        
+        .formula {
+            font-family: var(--font-display);
+            font-size: var(--size-h3);
+            font-weight: var(--weight-bold);
+            text-align: center;
+            margin: var(--space-3) 0;
+            letter-spacing: 2px;
+        }
+        
+        /* Agent Cards (BDS v3.1) */
+        .agents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-3);
+            margin: var(--space-4) 0;
+        }
+        
+        .agent-card {
+            padding: var(--space-3);
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+        
+        .agent-card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .agent-bigsis {
+            background: rgba(0, 161, 241, 0.1);
+            border: 2px solid var(--bigsis);
+        }
+        
+        .agent-bro {
+            background: rgba(254, 95, 0, 0.1);
+            border: 2px solid var(--bro);
+        }
+        
+        .agent-lilsis {
+            background: rgba(126, 58, 242, 0.1);
+            border: 2px solid var(--lilsis);
+        }
+        
+        .agent-cbo {
+            background: rgba(62, 184, 95, 0.1);
+            border: 2px solid var(--cbo);
+        }
+        
+        .agent-name {
+            font-family: var(--font-display);
+            font-size: var(--size-body);
+            font-weight: var(--weight-bold);
+            margin-bottom: var(--space-1);
+        }
+        
+        .agent-role {
+            font-size: var(--size-small);
+            color: var(--text-secondary);
+        }
+        
+        /* 10% Actions */
+        .action-bar {
+            position: fixed;
+            bottom: var(--space-4);
+            right: var(--space-4);
+            display: flex;
+            gap: var(--space-2);
+            z-index: 100;
+        }
+        
+        .btn {
+            padding: var(--space-2) var(--space-3);
+            background: var(--bigsis);
+            color: var(--text-inverse);
+            border: none;
+            border-radius: 4px;
+            font-family: var(--font-body);
+            font-size: var(--size-small);
+            font-weight: var(--weight-medium);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .btn:hover {
+            background: rgba(0, 161, 241, 0.9);
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--color-30);
+        }
+        
+        /* Mobile Menu Toggle (Hidden on Desktop) */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: var(--space-2);
+            left: var(--space-2);
+            z-index: 1000;
+            padding: var(--space-2);
+            background: var(--color-60);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        /* Responsive: 2 Breakpoints Only (HAIKU) */
+        @media (max-width: 1024px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                position: fixed;
+                left: -240px;
+                width: 240px;
+                z-index: 999;
+                transition: left 0.3s ease;
+            }
+            
+            .sidebar.open {
+                left: 0;
+                box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .content {
+                padding: var(--space-8) var(--space-3) var(--space-4);
+            }
+            
+            h1 {
+                font-size: var(--size-h2);
+            }
+            
+            h2 {
+                font-size: var(--size-h3);
+            }
+            
+            .agents-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Page visibility */
+        .page-section {
+            display: none;
+        }
+        
+        .page-section.active {
+            display: block;
+        }
+        
+        /* Dark Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: var(--space-2);
+            right: var(--space-2);
+            padding: var(--space-2);
+            background: var(--color-30);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            cursor: pointer;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <div class="layout">
+        <!-- Mobile Menu Toggle -->
+        <button class="mobile-menu" onclick="toggleSidebar()">☰</button>
+        
+        <!-- Theme Toggle -->
+        <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+        
+        <!-- 30% Sidebar (GitBook Style) -->
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-title">V2V Intelligence</div>
+                <div class="sidebar-subtitle">HAIKU Documentation</div>
+            </div>
+            
+            <!-- Core Vision Group -->
+            <div class="nav-group">
+                <div class="nav-group-title">
+                    <span class="nav-group-icon">🎯</span>
+                    Core Vision
+                </div>
+                <a href="#intro" class="nav-link active">Introduction</a>
+                <a href="#value" class="nav-link">VALUE Formula</a>
+                <a href="#quantum" class="nav-link">Quantum Evolution</a>
+            </div>
+            
+            <!-- ZenSIS Architecture Group -->
+            <div class="nav-group">
+                <div class="nav-group-title">
+                    <span class="nav-group-icon">🧠</span>
+                    ZenSIS Architecture
+                </div>
+                <a href="#memory" class="nav-link">Memory System</a>
+                <a href="#agents" class="nav-link">Agent Network</a>
+                <a href="#integration" class="nav-link">Integration Patterns</a>
+            </div>
+            
+            <!-- SPARK-SIS Group -->
+            <div class="nav-group">
+                <div class="nav-group-title">
+                    <span class="nav-group-icon">⚡</span>
+                    SPARK-SIS
+                </div>
+                <a href="#phases" class="nav-link">Phases & Flow</a>
+                <a href="#assets" class="nav-link">Asset Evolution</a>
+                <a href="#metrics" class="nav-link">Metrics</a>
+            </div>
+            
+            <!-- 5-Registry Group -->
+            <div class="nav-group">
+                <div class="nav-group-title">
+                    <span class="nav-group-icon">🔗</span>
+                    5-Registry
+                </div>
+                <a href="#digital" class="nav-link">Digital Assets</a>
+                <a href="#knowledge" class="nav-link">Knowledge Graph</a>
+                <a href="#verification" class="nav-link">Verification</a>
+            </div>
+            
+            <!-- Implementation Group -->
+            <div class="nav-group">
+                <div class="nav-group-title">
+                    <span class="nav-group-icon">🚀</span>
+                    Implementation
+                </div>
+                <a href="#quickstart" class="nav-link">Quick Start</a>
+                <a href="#api" class="nav-link">API Reference</a>
+                <a href="#examples" class="nav-link">Examples</a>
+            </div>
+        </nav>
+        
+        <!-- 60% Main Content -->
+        <main class="content" id="content">
+            <!-- Introduction Page (Default) -->
+            <section id="intro" class="page-section active">
+                <h1>V2V Intelligence System</h1>
+                <p class="lead">
+                    A quantum-enhanced value creation framework combining ZenSIS memory architecture, 
+                    SPARK-SIS workflow optimization, and blockchain-verified knowledge graphs.
+                </p>
+                
+                <h2>Core Philosophy</h2>
+                <p>
+                    V2V represents the evolution from traditional value chains to quantum value networks. 
+                    By integrating consciousness-aware systems with mathematical precision, we enable 
+                    exponential value creation through compound intelligence effects.
+                </p>
+                
+                <div class="formula-card">
+                    <h3>The VALUE Formula</h3>
+                    <div class="formula">V = (A × L) × (U × E)</div>
+                    <p style="text-align: center; margin-top: var(--space-2);">
+                        Vision × Alignment × Understanding × Execution
+                    </p>
+                </div>
+                
+                <h2>System Components</h2>
+                <div class="agents-grid">
+                    <div class="agent-card agent-bigsis">
+                        <div class="agent-name">BigSIS</div>
+                        <div class="agent-role">Trust & Guidance</div>
+                    </div>
+                    <div class="agent-card agent-bro">
+                        <div class="agent-name">BRO</div>
+                        <div class="agent-role">Action & Energy</div>
+                    </div>
+                    <div class="agent-card agent-lilsis">
+                        <div class="agent-name">LilSIS</div>
+                        <div class="agent-role">Creative Flow</div>
+                    </div>
+                    <div class="agent-card agent-cbo">
+                        <div class="agent-name">CBO</div>
+                        <div class="agent-role">Growth & Scale</div>
+                    </div>
+                </div>
+                
+                <h2>Quick Start</h2>
+                <div class="code-block">
+# Initialize V2V System
+npm install @v2v/core @v2v/zensis @v2v/spark
+
+# Configure ZenSIS Memory
+import { ZenSIS } from '@v2v/zensis'
+const memory = new ZenSIS({
+  type: 'semantic',
+  pattern: 'triadic'
+})
+
+# Start SPARK-SIS Flow
+import { SPARK } from '@v2v/spark'
+const workflow = new SPARK({
+  phases: ['SPEC', 'PSEUDO', 'ARCH', 'REFINE', 'COMPLETE']
+})
+                </div>
+                
+                <h2>HAIKU Design Principles</h2>
+                <p>
+                    This documentation follows the HAIKU framework: 4 Pillars (Constraint, Ratio, Harmony, Flow), 
+                    3 Constraints maximum per element, 2 Options when in doubt, 1 Base Unit (8px) for all measurements.
+                </p>
+                
+                <p>
+                    The 60-30-10 Golden Rule applies throughout: 60% primary content, 30% navigation and support, 
+                    10% actions and accents. Typography follows the 5-3-2 rule: 5 sizes, 3 weights, 2 font families.
+                </p>
+            </section>
+            
+            <!-- VALUE Formula Page -->
+            <section id="value" class="page-section">
+                <h1>The VALUE Formula</h1>
+                <p class="lead">
+                    A mathematical framework for exponential value creation through aligned consciousness and systematic execution.
+                </p>
+                
+                <div class="formula-card">
+                    <div class="formula">V = (A × L) × (U × E)</div>
+                </div>
+                
+                <h2>Vision (V)</h2>
+                <p>
+                    The quantum field of possibility. Vision creates the container for all potential value, 
+                    setting the upper bounds of what can be achieved. It acts as both attractor and organizer.
+                </p>
+                
+                <h2>Alignment (A)</h2>
+                <p>
+                    The coherence factor. When individual purposes align with collective vision, 
+                    value creation becomes exponential rather than linear. Alignment minimizes entropy.
+                </p>
+                
+                <h2>Leverage (L)</h2>
+                <p>
+                    The multiplication principle. Strategic positioning of resources and efforts 
+                    creates outsized returns. Leverage compounds through network effects.
+                </p>
+                
+                <h2>Understanding (U)</h2>
+                <p>
+                    The wisdom component. Deep comprehension of systems, patterns, and relationships 
+                    enables precise action. Understanding reduces waste and increases efficiency.
+                </p>
+                
+                <h2>Execution (E)</h2>
+                <p>
+                    The manifestation force. Ideas without action remain potential. 
+                    Execution transforms vision into reality through disciplined implementation.
+                </p>
+            </section>
+            
+            <!-- Quantum Evolution Page -->
+            <section id="quantum" class="page-section">
+                <h1>Quantum Evolution</h1>
+                <p class="lead">
+                    From linear progression to quantum leaps through consciousness-aware value networks.
+                </p>
+                
+                <h2>The Quantum Shift</h2>
+                <p>
+                    Traditional value chains operate in linear, sequential patterns. Quantum value networks 
+                    operate through entanglement, superposition, and observer effects, enabling simultaneous 
+                    multi-dimensional value creation.
+                </p>
+                
+                <h2>Compound Intelligence</h2>
+                <p>
+                    When multiple intelligence nodes connect, the collective capacity exceeds the sum of parts. 
+                    Each connection creates new pathways for value flow, generating emergent properties.
+                </p>
+                
+                <div class="code-block">
+// Quantum Value Calculation
+const quantumValue = (nodes) => {
+  const connections = nodes * (nodes - 1) / 2;
+  const entanglement = Math.pow(1.618, connections);
+  return baseValue * entanglement * coherence;
+}
+                </div>
+                
+                <h2>Evolution Stages</h2>
+                <p>
+                    1. <strong>Linear</strong>: Sequential value transfer<br>
+                    2. <strong>Network</strong>: Multi-directional value flow<br>
+                    3. <strong>Quantum</strong>: Entangled value creation<br>
+                    4. <strong>Conscious</strong>: Self-aware value evolution
+                </p>
+            </section>
+            
+            <!-- Memory System Page -->
+            <section id="memory" class="page-section">
+                <h1>ZenSIS Memory Architecture</h1>
+                <p class="lead">
+                    Triadic pattern-based memory system for persistent intelligence and compound learning.
+                </p>
+                
+                <h2>Memory Types</h2>
+                <div class="agents-grid">
+                    <div class="agent-card agent-bigsis">
+                        <div class="agent-name">SEMANTIC</div>
+                        <div class="agent-role">Facts & Concepts</div>
+                    </div>
+                    <div class="agent-card agent-bro">
+                        <div class="agent-name">EPISODIC</div>
+                        <div class="agent-role">Events & Context</div>
+                    </div>
+                    <div class="agent-card agent-lilsis">
+                        <div class="agent-name">PROCEDURAL</div>
+                        <div class="agent-role">Skills & Workflows</div>
+                    </div>
+                    <div class="agent-card agent-cbo">
+                        <div class="agent-name">WORKING</div>
+                        <div class="agent-role">Active Sessions</div>
+                    </div>
+                </div>
+                
+                <h2>Triadic Patterns</h2>
+                <p>
+                    Every memory forms triads: Creator-Creation-Experience. This pattern enables 
+                    multi-dimensional retrieval and associative learning across contexts.
+                </p>
+                
+                <h2>Vector Embeddings</h2>
+                <p>
+                    Memories are encoded as high-dimensional vectors, enabling semantic search 
+                    and pattern matching. Similar concepts cluster naturally in vector space.
+                </p>
+            </section>
+            
+            <!-- Agent Network Page -->
+            <section id="agents" class="page-section">
+                <h1>Agent Network</h1>
+                <p class="lead">
+                    Specialized AI agents working in concert to amplify collective intelligence.
+                </p>
+                
+                <h2>Core Agents</h2>
+                <div class="agents-grid">
+                    <div class="agent-card agent-bigsis">
+                        <div class="agent-name">BigSIS</div>
+                        <div class="agent-role">Strategic Orchestrator</div>
+                    </div>
+                    <div class="agent-card agent-bro">
+                        <div class="agent-name">BRO</div>
+                        <div class="agent-role">Execution Specialist</div>
+                    </div>
+                    <div class="agent-card agent-lilsis">
+                        <div class="agent-name">LilSIS</div>
+                        <div class="agent-role">Creative Catalyst</div>
+                    </div>
+                    <div class="agent-card agent-cbo">
+                        <div class="agent-name">CBO</div>
+                        <div class="agent-role">Growth Optimizer</div>
+                    </div>
+                </div>
+                
+                <h2>Communication Protocol</h2>
+                <p>
+                    Agents communicate through structured messages with semantic tagging. 
+                    Each message carries context, intent, and priority metadata.
+                </p>
+                
+                <h2>Collective Intelligence</h2>
+                <p>
+                    The network exhibits emergent behaviors not present in individual agents. 
+                    Swarm intelligence principles guide collaborative problem-solving.
+                </p>
+            </section>
+            
+            <!-- Integration Patterns Page -->
+            <section id="integration" class="page-section">
+                <h1>Integration Patterns</h1>
+                <p class="lead">
+                    Architectural patterns for seamless system integration and value flow.
+                </p>
+                
+                <h2>Event-Driven Architecture</h2>
+                <p>
+                    All system components communicate through events, enabling loose coupling 
+                    and high scalability. Events carry both data and metadata.
+                </p>
+                
+                <h2>API Gateway Pattern</h2>
+                <div class="code-block">
+// Unified API Gateway
+const gateway = {
+  auth: middleware.authenticate,
+  rate: middleware.rateLimit,
+  route: (req) => {
+    const service = router.match(req.path);
+    return service.handle(req);
+  }
+};
+                </div>
+                
+                <h2>Data Flow Patterns</h2>
+                <p>
+                    • <strong>Pipeline</strong>: Sequential transformation<br>
+                    • <strong>Fan-out</strong>: Parallel processing<br>
+                    • <strong>Aggregator</strong>: Result combination<br>
+                    • <strong>Circuit Breaker</strong>: Fault tolerance
+                </p>
+            </section>
+            
+            <!-- SPARK Phases Page -->
+            <section id="phases" class="page-section">
+                <h1>SPARK-SIS Phases</h1>
+                <p class="lead">
+                    Systematic workflow optimization through defined phases and WIP limits.
+                </p>
+                
+                <h2>The SPARK Flow</h2>
+                <div class="formula-card">
+                    <div class="formula">SPEC → PSEUDO → ARCH → REFINE → COMPLETE</div>
+                </div>
+                
+                <h2>Phase Definitions</h2>
+                <p>
+                    <strong>SPEC</strong>: Specification and requirements gathering<br>
+                    <strong>PSEUDO</strong>: Pseudocode and logic design<br>
+                    <strong>ARCH</strong>: Architecture and system design<br>
+                    <strong>REFINE</strong>: Implementation and optimization<br>
+                    <strong>COMPLETE</strong>: Testing and deployment
+                </p>
+                
+                <h2>WIP Limits</h2>
+                <p>
+                    Each phase has Work-In-Progress limits to prevent bottlenecks:
+                    SPEC (3), PSEUDO (3), ARCH (2), REFINE (3), COMPLETE (1)
+                </p>
+            </section>
+            
+            <!-- Asset Evolution Page -->
+            <section id="assets" class="page-section">
+                <h1>Asset Evolution</h1>
+                <p class="lead">
+                    Digital assets compound at 15% monthly through systematic value creation.
+                </p>
+                
+                <h2>Compound Formula</h2>
+                <div class="formula-card">
+                    <div class="formula">FV = PV × (1.15)^n</div>
+                    <p style="text-align: center; margin-top: var(--space-2);">
+                        15% Monthly = 5.35x Annual
+                    </p>
+                </div>
+                
+                <h2>Asset Types</h2>
+                <p>
+                    • <strong>Knowledge Assets</strong>: Documentation, patterns, insights<br>
+                    • <strong>Code Assets</strong>: Libraries, frameworks, tools<br>
+                    • <strong>Network Assets</strong>: Relationships, partnerships<br>
+                    • <strong>Data Assets</strong>: Datasets, models, analytics
+                </p>
+                
+                <h2>Evolution Mechanism</h2>
+                <p>
+                    Assets evolve through continuous refinement, cross-pollination, 
+                    and network effects. Each iteration adds layers of value.
+                </p>
+            </section>
+            
+            <!-- Other Pages -->
+            <section id="metrics" class="page-section">
+                <h1>Metrics & Analytics</h1>
+                <p class="lead">Real-time performance monitoring and optimization.</p>
+            </section>
+            
+            <section id="digital" class="page-section">
+                <h1>Digital Assets</h1>
+                <p class="lead">Tokenized value representation on blockchain.</p>
+            </section>
+            
+            <section id="knowledge" class="page-section">
+                <h1>Knowledge Graph</h1>
+                <p class="lead">Interconnected wisdom network with semantic relationships.</p>
+            </section>
+            
+            <section id="verification" class="page-section">
+                <h1>Verification System</h1>
+                <p class="lead">Blockchain-based truth and trust verification.</p>
+            </section>
+            
+            <section id="quickstart" class="page-section">
+                <h1>Quick Start Guide</h1>
+                <p class="lead">Get started with V2V in 5 minutes.</p>
+            </section>
+            
+            <section id="api" class="page-section">
+                <h1>API Reference</h1>
+                <p class="lead">Complete API documentation for all services.</p>
+            </section>
+            
+            <section id="examples" class="page-section">
+                <h1>Examples</h1>
+                <p class="lead">Real-world implementation patterns and use cases.</p>
+            </section>
+        </main>
+        
+        <!-- 10% Action Bar -->
+        <div class="action-bar">
+            <button class="btn btn-secondary" onclick="previousPage()">← Previous</button>
+            <button class="btn" onclick="nextPage()">Next →</button>
+        </div>
+    </div>
+    
+    <script>
+        // Handle navigation clicks
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Get target page ID from href
+                const targetId = link.getAttribute('href').substring(1);
+                
+                // Hide all pages
+                document.querySelectorAll('.page-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // Show target page
+                const targetPage = document.getElementById(targetId);
+                if (targetPage) {
+                    targetPage.classList.add('active');
+                }
+                
+                // Update active state
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                
+                // Close mobile menu
+                document.getElementById('sidebar').classList.remove('open');
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            });
+        });
+        
+        // Toggle mobile sidebar
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+        }
+        
+        // Toggle theme
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+        }
+        
+        // Navigation functions
+        function nextPage() {
+            const links = Array.from(document.querySelectorAll('.nav-link'));
+            const current = links.findIndex(l => l.classList.contains('active'));
+            if (current < links.length - 1) {
+                links[current + 1].click();
+            }
+        }
+        
+        function previousPage() {
+            const links = Array.from(document.querySelectorAll('.nav-link'));
+            const current = links.findIndex(l => l.classList.contains('active'));
+            if (current > 0) {
+                links[current - 1].click();
+            }
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextPage();
+            if (e.key === 'ArrowLeft') previousPage();
+            if (e.key === 'Escape') document.getElementById('sidebar').classList.remove('open');
+        });
+    </script>
+</body>
+</html>
