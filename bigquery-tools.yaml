@@ -1,0 +1,56 @@
+sources:
+  my-bigquery-source:
+    kind: bigquery
+    project: empirical-realm-412715
+    location: us
+
+tools:
+  # Query execution tools
+  execute-sql:
+    kind: bigquery-execute-sql
+    source: my-bigquery-source
+    description: Execute any SQL statement in BigQuery
+  
+  # Metadata tools
+  list-datasets:
+    kind: bigquery-list-dataset-ids
+    source: my-bigquery-source
+    description: List all available datasets in the project
+  
+  list-tables:
+    kind: bigquery-list-table-ids
+    source: my-bigquery-source
+    description: List all tables in a dataset
+  
+  get-dataset-info:
+    kind: bigquery-get-dataset-info
+    source: my-bigquery-source
+    description: Get detailed information about a dataset
+  
+  get-table-info:
+    kind: bigquery-get-table-info
+    source: my-bigquery-source
+    description: Get detailed information about a table including schema
+
+  # Parameterized query tools
+  query-data:
+    kind: bigquery-sql
+    source: my-bigquery-source
+    description: |
+      Execute a parameterized query against BigQuery. 
+      Provide the query with @parameter syntax for safe queries.
+    statement: |
+      SELECT * FROM UNNEST([1]) -- Placeholder, will be replaced with actual query
+    parameters:
+      - name: placeholder
+        type: string
+        description: This tool accepts dynamic queries
+
+toolsets:
+  bigquery-toolset:
+    - execute-sql
+    - list-datasets
+    - list-tables
+    - get-dataset-info
+    - get-table-info
+    - query-data
