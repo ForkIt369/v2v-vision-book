@@ -1,6 +1,6 @@
 {
   "name": "v2v-vision-book",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "V2V Intelligence System - HAIKU-Constrained Vision Book",
   "main": "index.html",
   "scripts": {
