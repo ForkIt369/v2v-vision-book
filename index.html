@@ -186,6 +186,29 @@
             font-weight: var(--weight-medium);
         }
         
+        /* Navigation Subgroups for Workstreams */
+        .nav-subgroup {
+            margin-left: var(--space-2);
+            margin-bottom: var(--space-2);
+            padding-left: var(--space-2);
+            border-left: 2px solid var(--border-color);
+        }
+        
+        .nav-subgroup-title {
+            font-size: 12px;
+            font-weight: var(--weight-bold);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: var(--space-1);
+            margin-top: var(--space-2);
+        }
+        
+        .nav-subgroup .nav-link {
+            font-size: 13px;
+            padding: 6px 12px;
+        }
+        
         /* 60% Main Content */
         .content {
             padding: var(--space-6);
@@ -444,48 +467,95 @@
                 <div class="sidebar-subtitle">HAIKU Documentation</div>
             </div>
             
-            <!-- The Vision Group -->
+            <!-- 1. Overview -->
+            <div class="nav-group">
+                <div class="nav-group-title">
+                    <span class="nav-group-icon">📊</span>
+                    1. Overview
+                </div>
+                <a href="#executive-summary" class="nav-link active">Executive Summary</a>
+                <a href="#timeframe" class="nav-link">90-Day Timeline</a>
+                <a href="#success-metrics" class="nav-link">Success Metrics</a>
+            </div>
+            
+            <!-- 2. V2V Track -->
             <div class="nav-group">
                 <div class="nav-group-title">
                     <span class="nav-group-icon">🎯</span>
-                    The Vision
+                    2. V2V Track
                 </div>
-                <a href="#intro" class="nav-link active">Introduction</a>
-                <a href="#value" class="nav-link">VALUE Formula</a>
-                <a href="#quantum" class="nav-link">Quantum Evolution</a>
+                <div class="nav-subgroup">
+                    <div class="nav-subgroup-title">A. Product</div>
+                    <a href="#product-initiatives" class="nav-link">Key Initiatives</a>
+                    <a href="#feature-roadmap" class="nav-link">Feature Roadmap</a>
+                    <a href="#integrations" class="nav-link">Integrations</a>
+                    <a href="#revenue-deliverables" class="nav-link">Revenue Deliverables</a>
+                </div>
+                <div class="nav-subgroup">
+                    <div class="nav-subgroup-title">B. Marketing</div>
+                    <a href="#channel-activation" class="nav-link">Channel Activation</a>
+                    <a href="#campaign-calendar" class="nav-link">Campaign Calendar</a>
+                    <a href="#engagement-metrics" class="nav-link">Engagement Metrics</a>
+                    <a href="#conversion-funnels" class="nav-link">Conversion Funnels</a>
+                </div>
             </div>
             
-            <!-- The Problem Group -->
+            <!-- 3. B2B Track -->
             <div class="nav-group">
                 <div class="nav-group-title">
-                    <span class="nav-group-icon">🔍</span>
-                    The Problem
+                    <span class="nav-group-icon">💼</span>
+                    3. B2B Track
                 </div>
-                <a href="#w3dv-intelligence" class="nav-link">W3DV Intelligence</a>
-                <a href="#uncaptured-value" class="nav-link">Uncaptured Value</a>
-                <a href="#bot-problem" class="nav-link">Bot Problem</a>
+                <div class="nav-subgroup">
+                    <div class="nav-subgroup-title">C. Business Development</div>
+                    <a href="#partnership-pipeline" class="nav-link">Partnership Pipeline</a>
+                    <a href="#asset-valuation" class="nav-link">Asset Valuation</a>
+                    <a href="#investor-readiness" class="nav-link">Investor Readiness</a>
+                    <a href="#revenue-optimization" class="nav-link">Revenue Optimization</a>
+                </div>
+                <div class="nav-subgroup">
+                    <div class="nav-subgroup-title">D. Legal & Operations</div>
+                    <a href="#ip-documentation" class="nav-link">IP Documentation</a>
+                    <a href="#equity-structure" class="nav-link">Equity Structure</a>
+                    <a href="#team-agreements" class="nav-link">Team Agreements</a>
+                    <a href="#tax-strategy" class="nav-link">Tax Strategy</a>
+                </div>
             </div>
             
-            <!-- The Solution Group -->
+            <!-- 4. Assets & Resources -->
             <div class="nav-group">
                 <div class="nav-group-title">
-                    <span class="nav-group-icon">💡</span>
-                    The Solution
+                    <span class="nav-group-icon">💎</span>
+                    4. Assets & Resources
                 </div>
-                <a href="#verse-id" class="nav-link">Ver$e ID Protocol</a>
-                <a href="#zensis" class="nav-link">ZenSIS Memory</a>
-                <a href="#spark" class="nav-link">SPARK Workflow</a>
+                <a href="#user-database" class="nav-link">User Database</a>
+                <a href="#growth-tools" class="nav-link">Growth Tools</a>
+                <a href="#portfolio-products" class="nav-link">Portfolio Products</a>
+                <a href="#strategy-docs" class="nav-link">Strategy Documentation</a>
             </div>
             
-            <!-- The Roadmap Group -->
+            <!-- 5. Execution -->
             <div class="nav-group">
                 <div class="nav-group-title">
-                    <span class="nav-group-icon">🚀</span>
-                    The Roadmap
+                    <span class="nav-group-icon">⚡</span>
+                    5. Execution
                 </div>
-                <a href="#monthly-benchmarks" class="nav-link">Monthly Benchmarks</a>
-                <a href="#10k-target" class="nav-link">10K MAU Target</a>
-                <a href="#90day-plan" class="nav-link">90-Day Plan</a>
+                <a href="#sprint-board" class="nav-link">Sprint Board</a>
+                <a href="#weekly-checkins" class="nav-link">Weekly Check-ins</a>
+                <a href="#change-management" class="nav-link">Change Management</a>
+                <a href="#roles-responsibilities" class="nav-link">Roles & Responsibilities</a>
+            </div>
+            
+            <!-- 6. Outputs -->
+            <div class="nav-group">
+                <div class="nav-group-title">
+                    <span class="nav-group-icon">📦</span>
+                    6. Outputs
+                </div>
+                <a href="#roadmap-docs" class="nav-link">Roadmap Documentation</a>
+                <a href="#visual-representations" class="nav-link">Visual Representations</a>
+                <a href="#negotiation-packages" class="nav-link">Negotiation Packages</a>
+                <a href="#investor-packets" class="nav-link">Investor Packets</a>
             </div>
             
             <!-- Our Assets Group -->
